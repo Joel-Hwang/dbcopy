@@ -14,10 +14,10 @@ public class BomHead {
     
     public static void main(String[] args) throws Exception {
         BomHead main = new BomHead();
-        main.getData();
+        main.getData(2185805);  //IFC_ID 반드시 줘야 함 max(IFC_ID) + 1
     }
 
-    public void getData() throws Exception {
+    public void getData(int ifcId) throws Exception {
         Connection conSource = null, conTarget = null;
         Statement stmt = null;
         PreparedStatement pstmt = null;
@@ -33,22 +33,15 @@ public class BomHead {
             " from PCC_BOM_HEAD where  \n"+
             "  factory = 'DS'  \n"+
             "   and ws_no in ( \n"+
-            " 'WS202005000000000337' \n"+
-            ",'WS202008000000000036' \n"+
-            ",'WS202008000000000699' \n"+
-            ",'WS202008000000000701' \n"+
-            ",'WS202009000000000137' \n"+
-            ",'WS202009000000000136' \n"+
-            ",'WS202005000000000285' \n"+
-            ",'WS202008000000000389' \n"+
-            ",'WS202008000000000820' \n"+
-            ",'WS202008000000000817' \n"+
+            "'WS202010000000000939' \n"+
+            ",'WS201908000000000024' \n"+
+            ",'WS202011000000000419' \n"+
             "   ) \n";
 
             stmt = conSource.createStatement();
+            System.out.println(query);
             rs = stmt.executeQuery(query);
             ResultSetMetaData resultSetMetaData = rs.getMetaData();
-            int ifcId = 2185795;
 
             while(rs.next()){
                 String qryVal = "";

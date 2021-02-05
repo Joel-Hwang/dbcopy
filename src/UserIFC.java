@@ -1,4 +1,5 @@
 package src;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -12,210 +13,90 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-public class UserIFC{
-    public static void main(String[] args) throws Exception{
-       // System.out.println(getUser("cheol.hwang"));
-        String[] users = {
-            "ahram.kang"
-            ,"ailie.min"
-            ,"alex.jeong"
-            ,"alex.kang"
-            ,"alice.kim"
-            ,"angie.park"
-            ,"anna.choi"
-            ,"avi.dev"
-            ,"blair.park"
-            ,"bngoc.develop"
-            ,"bomi.min"
-            ,"brad.ryu"
-            ,"brandon.son"
-            ,"brian.ryu"
-            ,"bryan.kim"
-            ,"btthanh.develop"
-            ,"byungkwan.lee"
-            ,"can.develop"
-            ,"changjong.kim"
-            ,"chanhee.lee"
-            ,"charlie.seol"
-            ,"charlotte.jeong"
-            ,"cheolyoung.choi"
-            ,"chris.baik"
-            ,"chulho.choi"
-            ,"chulhwan.cho"
-            ,"chulhyeon.park"
-            ,"conan.park"
-            ,"daehyun.kang"
-            ,"daejeong.jin"
-            ,"daisy.nam"
-            ,"dat.costing"
-            ,"dev.adrey"
-            ,"dev.disma"
-            ,"dev.yana"
-            ,"develop.phuong"
-            ,"develop.thong"
-            ,"dhien.develop"
-            ,"diana.hong"
-            ,"dieu.develop"
-            ,"dj.kim"
-            ,"dominic.kim"
-            ,"donggeun.shin"
-            ,"donghyun.kim"
-            ,"dongwon.choi"
-            ,"donyoung.lee"
-            ,"duyen.develop"
-            ,"eunbi.min"
-            ,"eungjung.kim"
-            ,"eunsik.park"
-            ,"garam.jo"
-            ,"gisung.na"
-            ,"gyubeom.choi"
-            ,"gyutaek.kim"
-            ,"ha.costing"
-            ,"haeseung.noh"
-            ,"haily.jang"
-            ,"haksoo.kim"
-            ,"hannah.jang"
-            ,"hannah.kim"
-            ,"hansoo.kim"
-            ,"hcam.develop"
-            ,"heegon.kim"
-            ,"heehwan.son"
-            ,"heeyoung.park"
-            ,"hien.develop"
-            ,"hiep.ce"
-            ,"hoibo.jung"
-            ,"honey.jo"
-            ,"huyen.costing"
-            ,"huynh.develop"
-            ,"hyesuk.im"
-            ,"hyunkyung.son"
-            ,"inkyoo.hwang"
-            ,"insub.cho"
-            ,"jacob.jeong"
-            ,"jaehee.jang"
-            ,"jaehee.lee"
-            ,"jaewoo.shin"
-            ,"james.jung"
-            ,"jasmine.min"
-            ,"jason.lim"
-            ,"jenna.cho"
-            ,"jeonghoon.kim"
-            ,"jiajing.teng"
-            ,"jieun.han"
-            ,"jihye.park"
-            ,"jin.jang"
-            ,"jinho.kim"
-            ,"jinjoo.baek"
-            ,"jinseok.jang"
-            ,"jinxia.dong"
-            ,"jongbae.kim"
-            ,"jonggu.kim"
-            ,"jongmun.park"
-            ,"joomyung.cha"
-            ,"joseph.han"
-            ,"juhak.yoon"
-            ,"junghee.kim"
-            ,"junghwa.cha"
-            ,"jungwoo.choi"
-            ,"juno.myung"
-            ,"junseob.shin"
-            ,"kisun.park"
-            ,"k-oanh.develop"
-            ,"kobe.lee"
-            ,"kwangjong.choi"
-            ,"kyoungtae.lim"
-            ,"lien.ie"
-            ,"lili.chen"
-            ,"liu.yang"
-            ,"long.develop"
-            ,"lttung.develop"
-            ,"michael.jo"
-            ,"mingzhu.zheng"
-            ,"minho.oh"
-            ,"minsu.choi"
-            ,"minsu.kang"
-            ,"mw.cho"
-            ,"mw.jeong"
-            ,"myungseok.kim"
-            ,"nasung.an"
-            ,"nhuhao.develop"
-            ,"nhut.ie"
-            ,"nick.kim"
-            ,"nugroho.pfc"
-            ,"nuri.kong"
-            ,"pdung.develop"
-            ,"peng.wang"
-            ,"pttra.develop"
-            ,"qingge.jiang"
-            ,"qinying.gao"
-            ,"sang.develop"
-            ,"sanghoon.lee"
-            ,"sangyong.lee"
-            ,"sangyoung.lee"
-            ,"sejin.hwang"
-            ,"seokmin.kang"
-            ,"seyeon.jeong"
-            ,"sheila.kim"
-            ,"shotgun.oh"
-            ,"shufen.guo"
-            ,"sooil.park"
-            ,"soryeong.kim"
-            ,"sunghee.seo"
-            ,"sungkuk.joo"
-            ,"sunil.pak"
-            ,"sw.jang"
-            ,"taekyung.cho"
-            ,"taemin.jeon"
-            ,"ted.kong"
-            ,"thanh.develop"
-            ,"thu.develop"
-            ,"tohuyen.costing"
-            ,"tong.develop"
-            ,"truoc.develop"
-            ,"tuan.costing"
-            ,"van.develop"
-            ,"vhung.develop"
-            ,"vinh.develop"
-            ,"wenchao.huang"
-            ,"wonkeun.lee"
-            ,"woohyuk.nam"
-            ,"yechan.yoo"
-            ,"yoonchan.kim"
-            ,"younghee.ju"
-            ,"youngock.lee"
-            };
+/*
+Lab
+"byungkwan.lee","sungchul.kim","heeyeun.nam","junyong.park"
+,"jonghoon.baek","jungwook.oh","taeseong.yu","jungsik.lee"
+,"hwasook.lee","chiwon.jang","heesu.jeon"
 
-            for(String userNm : users){
-                try{
-                    saveAras(getUser(userNm));
-                }catch(Exception err){
-                    System.out.println("error>>>"+userNm);
-                }
+IE
+
+
+
+"seunghwan.baek"
+,"yoonjung.lee"
+,"ys.jeong"
+,"minsu.choi"
+,"junghee.kim"
+,"jaehee.jang"
+,"sunhee.cho"
+,"young.jung"
+,"TaeHwan.Ju"
+,"kyunghwan.ko"
+,"lynn.kim"
+,"toehyun.kim"
+,"hyunwoo.park"
+,"minsu.son"
+,"jinwoo.jung"
+,"zoey.choi"
+
+
+
+Workshop
+
+"cheolsu.lee"
+,"dokyung.kim"
+,"hyunjin.cho"
+
+
+3p
+
+
+*/
+
+public class UserIFC {
+    public static void main(String[] args) throws Exception {
+        // System.out.println(getUser("cheol.hwang"));
+        String[] users = { 
+            "myeongho.yeo"
+            ,"EunKyoung.Kim"
+            ,"byungjin.chun"
+        };
+
+        for (String userNm : users) {
+            try {
+                saveAras(getUser(userNm));
+            } catch (Exception err) {
+                System.out.println("error>>>" + userNm);
             }
-                
+        }
+
     }
 
-    public static User getUser(String userName) throws Exception{
+    public static User getUser(String userName) throws Exception {
         String urlMyCs = Common.urlMyCs + userName;
         URL url = new URL(urlMyCs);
-        HttpURLConnection con = (HttpURLConnection)url.openConnection();
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
-        con.setRequestProperty("Accept", " text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
+        con.setRequestProperty("Accept",
+                " text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
         con.setRequestProperty("Accept-Encoding", "gzip, deflate");
         con.setRequestProperty("Accept-Language", "ko,en-US;q=0.9,en;q=0.8,ko-KR;q=0.7");
-        con.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36");
-        con.setRequestProperty("Cookie", "Login=; ASP.NET_SessionId=whvmftaesu0aewu3hiftkd44; UTF8_Option=0; LoginCookie=31155317294716365340576624251788375816363674370337585708576616362331178857084096242558343411110739215708311521042331531740962947460536223703005045280734178800500050167217880710071007341788005007104605; myEWSURL=57082104210447605317110715991599311553175834576621040050178831155317294716365340576624251788375816363674159937494813078915993749392137585708242558343411576617882425531736743921; SKINNUM=1");
-        
+        con.setRequestProperty("User-Agent",
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36");
+        con.setRequestProperty("Cookie",
+                "Login=; ASP.NET_SessionId=whf20rrjtkeewgvbebzjsanr; UTF8_Option=0; LoginCookie=3115531729471636534057662425178837581636367437033758570857661636233117885708409624255834341111073921570831152104233153174096294746053622370300504528073417880050005016721788071007102542178800500050; myEWSURL=57082104210447605317110715991599311553175834576621040050178831155317294716365340576624251788375816363674159937494813078915993749392137585708242558343411576617882425531736743921; SKINNUM=1;");
+
         int responseCode = con.getResponseCode();
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
         StringBuffer response = new StringBuffer();
-        while((inputLine = in.readLine())!= null){
+        while ((inputLine = in.readLine()) != null) {
             response.append(inputLine);
         }
         in.close();
-        //System.out.println("HTTP 응답 코드 : " + responseCode); 
-        //System.out.println("HTTP body : " + response.toString());
+        // System.out.println("HTTP 응답 코드 : " + responseCode);
+        // System.out.println("HTTP body : " + response.toString());
 
         Document doc = Jsoup.parse(response.toString());
         String company = doc.select("span#LiteralCompany").text();
@@ -225,9 +106,9 @@ public class UserIFC{
         String phone = doc.select("span#LiteralPhone").text();
         String mobile = doc.select("span#LiteralMobile").text();
         String img = doc.select("th.popup_pic_bg img").attr("src");
-      
+
         User user = new User();
-        if(!"".equals(email)){
+        if (!"".equals(email)) {
             user.login_name = email.split("@")[0];
             user.first_name = name.substring(0, 1);
             user.last_name = name.substring(1);
@@ -235,8 +116,8 @@ public class UserIFC{
             user.email = email;
             user.telephone = phone;
             user.cell = mobile;
-            user.img = Common.urlMyCsRoot+img;
-        }else{
+            user.img = Common.urlMyCsRoot + img;
+        } else {
             user.login_name = userName;
             user.first_name = userName.substring(0, 1);
             user.last_name = userName.substring(1);
@@ -247,25 +128,28 @@ public class UserIFC{
             user.cell = "010-0000-0000";
             user.img = "";
         }
-       
+
         return user;
     }
-    public static String token() throws Exception{
+
+    public static String token() throws Exception {
         String authServer = Common.authServer;
         String database = Common.database;
         String id = Common.arasId;
         String pw = Common.arasPw;
 
         URL url = new URL(authServer);
-        HttpURLConnection con = (HttpURLConnection)url.openConnection();
-        String parameters = String.format("grant_type=password&scope=Innovator&client_id=IOMApp&username=%s&password=%s&database=%s", id,pw,database);
-        
-        byte[] postData = parameters.getBytes( StandardCharsets.UTF_8 );
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        String parameters = String.format(
+                "grant_type=password&scope=Innovator&client_id=IOMApp&username=%s&password=%s&database=%s", id, pw,
+                database);
+
+        byte[] postData = parameters.getBytes(StandardCharsets.UTF_8);
         con.setRequestMethod("POST");
-        con.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded"); 
-        con.setRequestProperty( "charset", "utf-8");
-        con.setRequestProperty( "Content-Length", Integer.toString( postData.length ));
-        con.setUseCaches( false );
+        con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+        con.setRequestProperty("charset", "utf-8");
+        con.setRequestProperty("Content-Length", Integer.toString(postData.length));
+        con.setUseCaches(false);
         con.setDoOutput(true);
         con.setRequestProperty("grant_type", "password");
         con.setRequestProperty("scope", "Innovator");
@@ -274,32 +158,32 @@ public class UserIFC{
         con.setRequestProperty("password", pw);
         con.setRequestProperty("database", database);
 
-        DataOutputStream wr = new DataOutputStream(con.getOutputStream()); 
-        wr.writeBytes(parameters); 
-        wr.flush(); 
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.writeBytes(parameters);
+        wr.flush();
         wr.close();
 
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
         StringBuffer response = new StringBuffer();
-        while((inputLine = in.readLine())!= null){
+        while ((inputLine = in.readLine()) != null) {
             response.append(inputLine);
         }
         in.close();
         JSONParser parser = new JSONParser();
-        JSONObject json = (JSONObject)parser.parse(response.toString());
-        String token = (String)json.get("access_token");
-        
+        JSONObject json = (JSONObject) parser.parse(response.toString());
+        String token = (String) json.get("access_token");
+
         return token;
     }
 
-    public static void saveAras(User user) throws Exception{
+    public static void saveAras(User user) throws Exception {
         String token = token();
 
         String apiServer = Common.apiServer;
 
         URL url = new URL(apiServer + "/USER");
-        HttpURLConnection con = (HttpURLConnection)url.openConnection();
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
         JSONObject userObj = new JSONObject();
         userObj.put("login_name", user.login_name);
@@ -312,38 +196,37 @@ public class UserIFC{
         userObj.put("cell", user.cell);
         userObj.put("password", user.password);
 
-        String parameters =userObj.toJSONString();
-        
-        byte[] postData = parameters.getBytes( "UTF-8" );
+        String parameters = userObj.toJSONString();
+
+        byte[] postData = parameters.getBytes("UTF-8");
         con.setRequestMethod("POST");
-        con.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded"); 
-        con.setRequestProperty( "charset", "utf-8");
-        con.setRequestProperty( "Content-Length", Integer.toString( postData.length ));
-        con.setRequestProperty( "Authorization", "Bearer " + token);
-        con.setUseCaches( false );
+        con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+        con.setRequestProperty("charset", "utf-8");
+        con.setRequestProperty("Content-Length", Integer.toString(postData.length));
+        con.setRequestProperty("Authorization", "Bearer " + token);
+        con.setUseCaches(false);
         con.setDoOutput(true);
 
-        DataOutputStream wr = new DataOutputStream(con.getOutputStream()); 
-        wr.write(postData); 
-        wr.flush(); 
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.write(postData);
+        wr.flush();
         wr.close();
 
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
         StringBuffer response = new StringBuffer();
-        while((inputLine = in.readLine())!= null){
+        while ((inputLine = in.readLine()) != null) {
             response.append(inputLine);
         }
         in.close();
         JSONParser parser = new JSONParser();
-        JSONObject json = (JSONObject)parser.parse(response.toString());
-        
+        JSONObject json = (JSONObject) parser.parse(response.toString());
+
     }
 
 }
 
-
-class User{
+class User {
     String login_name;
     String first_name;
     String last_name;
@@ -358,9 +241,9 @@ class User{
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return String.format("login_name : %s, first_name : %s, last_name : %s, company_name: %s, dept: %s, password : %s, email : %s, telephone : %s, cell : %s, img : %s"
-        , login_name, first_name, last_name, company_name, dept, password, email, telephone, cell, img);
+        return String.format(
+                "login_name : %s, first_name : %s, last_name : %s, company_name: %s, dept: %s, password : %s, email : %s, telephone : %s, cell : %s, img : %s",
+                login_name, first_name, last_name, company_name, dept, password, email, telephone, cell, img);
     }
-    
+
 }

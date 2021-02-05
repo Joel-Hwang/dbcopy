@@ -14,10 +14,10 @@ public class BomTail {
     
     public static void main(String[] args) throws Exception {
         BomTail main = new BomTail();
-        main.getData();
+        main.getData(3917870);  //무조건 수정
     }
 
-    public void getData() throws Exception {
+    public void getData(int ifcId) throws Exception {
         Connection conSource = null, conTarget = null;
         Statement stmt = null;
         PreparedStatement pstmt = null;
@@ -33,22 +33,14 @@ public class BomTail {
             " from PCC_CS_BOM_TAIL where  \n"+
             "  factory = 'DS'  \n"+
             "   and ws_no in ( \n"+
-            " 'WS202005000000000337' \n"+
-            ",'WS202008000000000036' \n"+
-            ",'WS202008000000000699' \n"+
-            ",'WS202008000000000701' \n"+
-            ",'WS202009000000000137' \n"+
-            ",'WS202009000000000136' \n"+
-            ",'WS202005000000000285' \n"+
-            ",'WS202008000000000389' \n"+
-            ",'WS202008000000000820' \n"+
-            ",'WS202008000000000817' \n"+
+            "'WS202010000000000939' \n"+
+            ",'WS201908000000000024' \n"+
+            ",'WS202011000000000419' \n"+
             "   ) \n";
 
             stmt = conSource.createStatement();
             rs = stmt.executeQuery(query);
             ResultSetMetaData resultSetMetaData = rs.getMetaData();
-            int ifcId = 3917033;
 
             while(rs.next()){
                 String qryVal = "";
