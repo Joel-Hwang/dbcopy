@@ -46,7 +46,7 @@ public class LUMatInfo{
                 if("Set-Cookie".equals(header.getKey())){
                     cookie = cookie + value+";";
                 }
-                System.out.println(header.getKey() + " :" + value);
+                //System.out.println(header.getKey() + " :" + value);
             }
         }
 
@@ -155,39 +155,43 @@ public class LUMatInfo{
         conn.setRequestProperty("Cookie", cookie);
         conn.setRequestProperty("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0");
         conn.setRequestProperty("Accept", "*/*");
-        conn.setRequestProperty("Accept-Encoding", "gzip, deflate, br");
+        conn.setRequestProperty("Accept-Encoding", "identity");
         conn.setRequestProperty("Connection", "keep-alive");
         conn.setRequestProperty("Host","www.nikeconnect.com");
         conn.setInstanceFollowRedirects(false);
-        //conn.setRequestProperty("Accept-Language", "ko-KR,en-US;q=0.7,en;q=0.3");
-        //conn.setRequestProperty("Referer", "https://www.nikeconnect.com/Asia.CHN.Guangzhou.LTM_SSL/FWMain_LTM.aspx");
-        //conn.setRequestProperty("Upgrade-Insecure-Requests", "1");
-        //conn.setRequestProperty("Pragma","no-cache");
-        //conn.setRequestProperty("Cache-Control","no-cache");
-
+        conn.setRequestProperty("Accept-Language", "ko-KR,en-US;q=0.7,en;q=0.3");
+        conn.setRequestProperty("Referer", "https://www.nikeconnect.com/Asia.CHN.Guangzhou.LTM_SSL/FWMain_LTM.aspx");
+        conn.setRequestProperty("Upgrade-Insecure-Requests", "1");
+        conn.setRequestProperty("Pragma","no-cache");
+        conn.setRequestProperty("Cache-Control","no-cache");
+        
         for (Map.Entry<String, List<String>> header : conn.getHeaderFields().entrySet()) {
             for (String value : header.getValue()) {
-                System.out.println(header.getKey() + " : " + value);
-                if("Set-Cookie".equals(header.getKey())){
-                    cookie = cookie + value+";";
-                }
+                System.out.println(header.getKey()+" : " + value);
             }
         }
         System.out.println(cookie);
 
         // 응답 내용(BODY) 구하기
-        /*int responseCode = conn.getResponseCode(); 
-        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8")); 
+        int responseCode = conn.getResponseCode(); 
+        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream())); 
         String inputLine; 
         StringBuffer response = new StringBuffer(); 
         while ((inputLine = in.readLine()) != null) { 
             response.append(inputLine); } 
             in.close(); 
             // print result 
-            System.out.println("HTTP 응답 코드 : " + responseCode); 
-            System.out.println("HTTP body : " + response.toString());
+            //System.out.println("HTTP 응답 코드 : " + responseCode); 
+            //System.out.println("HTTP body : " + response.toString());
 
-*/
+            Document doc = Jsoup.parse(response.toString());
+            String __VIEWSTATE = doc.select("input[name=__VIEWSTATE]").val();
+            String __VIEWSTATEGENERATOR = doc.select("input[name=__VIEWSTATEGENERATOR]").val();
+            String __EVENTVALIDATION = doc.select("input[name=__EVENTVALIDATION]").val();
+            
+            System.out.println("__VIEWSTATE : " + __VIEWSTATE);
+            System.out.println("__VIEWSTATEGENERATOR : " + __VIEWSTATEGENERATOR);
+            System.out.println("__EVENTVALIDATION : " + __EVENTVALIDATION);
         /*BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         StringBuffer stringBuffer = new StringBuffer();
         String inputLine;
@@ -199,6 +203,7 @@ public class LUMatInfo{
 
         String response = stringBuffer.toString();*/
         
+        /*
         try (InputStream in = conn.getInputStream();
              ByteArrayOutputStream out = new ByteArrayOutputStream()) {
 
@@ -208,11 +213,11 @@ public class LUMatInfo{
                 out.write(buf, 0, length);
             }
             
-            String output = new String(out.toByteArray(),"CP936");
+            String output = new String(out.toByteArray(),"UTF-8");
             System.out.println(output);
             Document doc = Jsoup.parse(output);
         }
-
+*/
 
         
         // 접속 해제
