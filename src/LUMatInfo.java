@@ -15,18 +15,21 @@ import java.util.Map;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
+import org.jsoup.nodes.Element;
 
 import java.util.List;
 
 public class LUMatInfo{
     public static void main(String[] args) throws Exception {
+        long now = System.currentTimeMillis();
+        String[] keyword = {"LU/PK 4267","LU2C/CL 3446","LU/PK 2697","TR/NBPU 5124"}; //The length should be 4
         String[] call1 = call();
         String jsalt = call1[0];
         String cookie = call1[1];
         String cookie2 = call2(jsalt,cookie);
-        StringBuffer formData = call3(cookie2);
+        StringBuffer formData = call3(cookie2,keyword);
         call4(formData,cookie2);
+        System.out.println(System.currentTimeMillis()-now);
     }
 
     public static String[] call() throws Exception{
@@ -35,8 +38,8 @@ public class LUMatInfo{
         URL url = new URL("https://www.nikeconnect.com/irj/portal");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
-        conn.setConnectTimeout(3000);
-        conn.setReadTimeout(3000);
+        conn.setConnectTimeout(8000);
+        conn.setReadTimeout(8000);
         //conn.setInstanceFollowRedirects(false);
         conn.setRequestProperty("Accept", "*/*");
         conn.setRequestProperty("Connection", "keep-alive");
@@ -100,8 +103,8 @@ public class LUMatInfo{
         conn.setDoInput(true); 
         conn.setDoOutput(true);
         conn.setInstanceFollowRedirects(false);
-        conn.setConnectTimeout(3000);
-        conn.setReadTimeout(3000);
+        conn.setConnectTimeout(8000);
+        conn.setReadTimeout(8000);
         
         conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
         conn.setRequestProperty("Host","www.nikeconnect.com");
@@ -149,12 +152,12 @@ public class LUMatInfo{
         return cookie2;
     }
 
-    public static StringBuffer call3( String cookie) throws Exception{
+    public static StringBuffer call3( String cookie, String[] keyword) throws Exception{
         URL url = new URL("https://www.nikeconnect.com/Asia.CHN.Guangzhou.LTM_SSL/FWMCS_List_LTM.aspx");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
-        conn.setConnectTimeout(3000);
-        conn.setReadTimeout(3000);
+        conn.setConnectTimeout(8000);
+        conn.setReadTimeout(8000);
         conn.setRequestProperty("Cookie", cookie);
         conn.setRequestProperty("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0");
         conn.setRequestProperty("Accept", "*/*");
@@ -206,9 +209,8 @@ public class LUMatInfo{
         buffer.append("__EVENTVALIDATION").append("=").append(URLEncoder.encode(__EVENTVALIDATION,StandardCharsets.UTF_8)).append("&"); 
         buffer.append("ucFilter$dd1Row1Field").append("=").append("1").append("&"); 
         buffer.append("ucFilter$dd1Row1Operator").append("=").append(URLEncoder.encode("=",StandardCharsets.UTF_8)).append("&"); 
-        buffer.append("ucFilter$cb1Row1$TextBox").append("=").append(URLEncoder.encode("LU2C/CL 3446",StandardCharsets.UTF_8)).append("&"); 
+        buffer.append("ucFilter$cb1Row1$TextBox").append("=").append(URLEncoder.encode(keyword[0],StandardCharsets.UTF_8)).append("&"); 
         buffer.append("ucFilter$cb1Row1$HiddenField").append("=").append("-2").append("&"); 
-
         buffer.append("ucFilter$dd1Row2Field").append("=").append("2").append("&");
         buffer.append("ucFilter$dd1Row2Operator").append("=").append(URLEncoder.encode("=",StandardCharsets.UTF_8)).append("&");
         buffer.append("ucFilter$cb1Row2$TextBox").append("=").append("").append("&");
@@ -231,8 +233,8 @@ public class LUMatInfo{
         buffer.append("ucFilter$cb1Row6$HiddenField").append("=").append("0").append("&");
         buffer.append("ucFilter$dd2Row1Field").append("=").append("1").append("&");
         buffer.append("ucFilter$dd2Row1Operator").append("=").append(URLEncoder.encode("=",StandardCharsets.UTF_8)).append("&");
-        buffer.append("ucFilter$cb2Row1$TextBox").append("=").append("").append("&");
-        buffer.append("ucFilter$cb2Row1$HiddenField").append("=").append("0").append("&");
+        buffer.append("ucFilter$cb2Row1$TextBox").append("=").append(URLEncoder.encode(keyword[1],StandardCharsets.UTF_8)).append("&");
+        buffer.append("ucFilter$cb2Row1$HiddenField").append("=").append("-2").append("&");
         buffer.append("ucFilter$dd2Row2Field").append("=").append("2").append("&");
         buffer.append("ucFilter$dd2Row2Operator").append("=").append(URLEncoder.encode("=",StandardCharsets.UTF_8)).append("&");
         buffer.append("ucFilter$cb2Row2$TextBox").append("=").append("").append("&");
@@ -256,8 +258,8 @@ public class LUMatInfo{
         buffer.append("ucFilter$lbtnAdvancedSearch").append("=").append("Search").append("&");
         buffer.append("ucFilter$dd3Row1Field").append("=").append("1").append("&");
         buffer.append("ucFilter$dd3Row1Operator").append("=").append(URLEncoder.encode("=",StandardCharsets.UTF_8)).append("&");
-        buffer.append("ucFilter$cb3Row1$TextBox").append("=").append("").append("&");
-        buffer.append("ucFilter$cb3Row1$HiddenField").append("=").append("0").append("&");
+        buffer.append("ucFilter$cb3Row1$TextBox").append("=").append(URLEncoder.encode(keyword[2],StandardCharsets.UTF_8)).append("&");
+        buffer.append("ucFilter$cb3Row1$HiddenField").append("=").append("-2").append("&");
         buffer.append("ucFilter$dd3Row2Field").append("=").append("2").append("&");
         buffer.append("ucFilter$dd3Row2Operator").append("=").append(URLEncoder.encode("=",StandardCharsets.UTF_8)).append("&");
         buffer.append("ucFilter$cb3Row2$TextBox").append("=").append("").append("&");
@@ -280,8 +282,8 @@ public class LUMatInfo{
         buffer.append("ucFilter$cb3Row6$HiddenField").append("=").append("0").append("&");
         buffer.append("ucFilter$dd4Row1Field").append("=").append("1").append("&");
         buffer.append("ucFilter$dd4Row1Operator").append("=").append(URLEncoder.encode("=",StandardCharsets.UTF_8)).append("&");
-        buffer.append("ucFilter$cb4Row1$TextBox").append("=").append("").append("&");
-        buffer.append("ucFilter$cb4Row1$HiddenField").append("=").append("0").append("&");
+        buffer.append("ucFilter$cb4Row1$TextBox").append("=").append(URLEncoder.encode(keyword[3],StandardCharsets.UTF_8)).append("&");
+        buffer.append("ucFilter$cb4Row1$HiddenField").append("=").append("-2").append("&");
         buffer.append("ucFilter$dd4Row2Field").append("=").append("2").append("&");
         buffer.append("ucFilter$dd4Row2Operator").append("=").append(URLEncoder.encode("=",StandardCharsets.UTF_8)).append("&");
         buffer.append("ucFilter$cb4Row2$TextBox").append("=").append("").append("&");
@@ -323,8 +325,8 @@ public class LUMatInfo{
         conn.setDoInput(true); 
         conn.setDoOutput(true);
         conn.setInstanceFollowRedirects(false);
-        conn.setConnectTimeout(3000);
-        conn.setReadTimeout(3000);
+        conn.setConnectTimeout(8000);
+        conn.setReadTimeout(8000);
         
         conn.setRequestProperty("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
         conn.setRequestProperty("Accept-Language","ko,en-US;q=0.9,en;q=0.8,ko-KR;q=0.7");
@@ -365,9 +367,14 @@ public class LUMatInfo{
             }
             String output = new String(out.toByteArray(), "UTF-8");
             Document doc = Jsoup.parse(output);
-            String gvList = doc.select("table#gvList").text();
-            String desc = doc.select("table#gvList>tbody>tr:nth-child(2)>td:nth-child(9)").text();
-            System.out.println(desc);
+            
+            for(int i = 1; i<doc.select("table#gvList>tbody>tr").size(); i++){
+                Element tr = doc.select("table#gvList>tbody>tr").get(i);
+                String key = tr.select("td:nth-child(3)").text();
+                String desc = tr.select("td:nth-child(9)").text();
+                System.out.println(key + " : " + desc);
+            }
+            //String desc = doc.select("table#gvList>tbody>tr:nth-child(2)>td:nth-child(9)").text();
         }
 
         // 접속 해제
